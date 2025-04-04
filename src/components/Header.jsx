@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router'; 
-import { HiMenuAlt3 } from "react-icons/hi"; 
+import { NavLink } from 'react-router';
+import { HiMenuAlt3 } from "react-icons/hi";
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const [isOpen, setIsOpen] = useState(false); 
+    const [isOpen, setIsOpen] = useState(false);
+    const { user } = useSelector(store => store.user);
 
-    const navContent = [
-        { path: "/", element: "Home" },
-        { path: "/tasks", element: "Tasks" },
-        { path: "/profile", element: "Profile" },
-        { path: "/login", element: "Login" },
-        { path: "/register", element: "Register" },
-    ];
+    let navContent = []
+    if (user) {
+        navContent = [
+            { path: "/", element: "Home" },
+            { path: "/tasks", element: "Tasks" },
+            { path: "/completed", element: "Completed" },
+            { path: "/profile", element: "Profile" },
+        ];
+    } else {
+        navContent = [
+            { path: "/register", element: "Register" },
+            { path: "/login", element: "Login" },
+        ];
+    }
+
+
 
     return (
-        <header className="bg-white shadow py-2 px-4 md:px-10 fixed w-full z-10">
+        <header className="bg-white shadow py-2 px-2 md:px-10 fixed w-full z-10">
             <nav className="container mx-auto flex justify-between items-center">
                 {/* Logo Section */}
                 <div className="flex items-center gap-2">
