@@ -1,13 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const Task = () => {
-    return (
-        <div className="flex items-center justify-center my-20 bg-gray-100">
-            <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg">
-                <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Task</h2>
-            </div>
-        </div>
-    )
-}
+  const [isCompleted, setIsCompleted] = useState(false);
+  const navigate = useNavigate();
 
-export default Task
+  return (
+    <div className="w-full max-w-lg">
+      <div className={`bg-white border-2 border-gray-200 hover:border-purple-500 rounded-2xl shadow-md transition hover:shadow-lg p-6 space-y-3 ${isCompleted ? "border-purple-500" : ""}`}>
+        <div className='flex items-center justify-between'>
+          <h1 onClick={() => navigate(`/details/id`)} className="text-xl font-semibold text-purple-700">Task Title</h1>
+
+          {/* Checkbox to mark complete/incomplete */}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="complete"
+              checked={isCompleted}
+              onChange={() => setIsCompleted(!isCompleted)}
+              className="accent-purple-600 w-5 h-5"
+            />
+          </div>
+        </div>
+        <p onClick={() => navigate(`/details/id`)} className="text-sm text-gray-600 leading-relaxed">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem at tempora eos explicabo tenetur
+          voluptatibus tempore repudiandae, esse quasi illum expedita impedit reiciendis corrupti dolorem
+          consectetur. Quibusdam quas soluta eum.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Task;
