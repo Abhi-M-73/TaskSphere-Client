@@ -1,5 +1,5 @@
 import axiosInstance from '../utils/axiosInstance';
-import { USER_API } from '../utils/constant';
+import { Task_API, USER_API } from '../utils/constant';
 
 // Function to register a new user
 export const registerUser = async (userData) => {
@@ -26,5 +26,23 @@ export const logoutUser = async () => {
         return response.data;
     } catch (error) {
         return error.response.data.message;
+    }
+}
+
+export const createTask = async (userData) => {
+    try {
+        const response = await axiosInstance.post(`${Task_API}/create`, userData);
+        return response.data;
+    } catch (error) {
+        return error.response.data.message
+    }
+}
+
+export const getAllTask = async () => {
+    try {
+        const response = await axiosInstance.get(`${Task_API}/all`);
+        return response.data;
+    } catch (error) {
+        return error.response.data.message
     }
 }
